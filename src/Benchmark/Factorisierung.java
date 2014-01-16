@@ -1,23 +1,61 @@
-package GPU;
+package Benchmark;
 
 import java.io.IOException;
 import java.nio.ByteOrder;
 
 import org.bridj.Pointer;
 
+
 import com.nativelibs4java.opencl.CLBuffer;
 import com.nativelibs4java.opencl.CLContext;
 import com.nativelibs4java.opencl.CLEvent;
 import com.nativelibs4java.opencl.CLKernel;
 import com.nativelibs4java.opencl.CLProgram;
-import com.nativelibs4java.opencl.CLMem.Usage;
 import com.nativelibs4java.opencl.CLQueue;
 import com.nativelibs4java.opencl.JavaCL;
+import com.nativelibs4java.opencl.CLMem.Usage;
 import com.nativelibs4java.util.IOUtils;
 
-public class GPUFactor {
-	
-	public static void factor_gpu_TEST(long[] todo) throws IOException{
+public class Factorisierung {
+//	public static void main(String[] args) {
+//		int zuTeilen = (int) (Math.random()*100+1);
+//		int n = 100000;
+//		long startt = System.currentTimeMillis();
+//		for(int i = 0; i< n;i++){
+//			//Factorisierung.factor(zuTeilen);
+//			zuTeilen += 13;
+//		}
+//		long endt = System.currentTimeMillis();
+//		System.out.println("Total time needed: " + (endt-startt) + "ms");
+//	}
+	public static long CPU_factor(long[] todo){
+		System.out.println("Starting CPU Programm!");
+		long startt = System.currentTimeMillis();
+		int i;
+		boolean firstTime = true;
+
+		//System.out.print(zuTeilen + " = ");
+		for(int id = 0; id < todo.length;id++){
+			long zuTeilen = todo[id];
+			for (i = 2; i <= zuTeilen;) {
+				if (zuTeilen % i == 0) {
+					if (!firstTime) {
+						//System.out.print(" * ");
+					} else {
+						firstTime = false;
+					}
+					//System.out.print(i);
+					zuTeilen = zuTeilen / i;
+				}
+				if (zuTeilen % i != 0)
+					i++;
+			}
+		}
+		long endt = System.currentTimeMillis();
+		System.out.println("CPU Programm finished!");
+		return (endt-startt);
+	}
+	public static long GPU_factor(long[] todo) throws IOException{
 		System.out.println("Setting up GPU Programm...");
 		CLContext context = JavaCL.createBestContext();
         CLQueue queue = context.createDefaultQueue();
@@ -32,7 +70,7 @@ public class GPUFactor {
         
         CLBuffer<Long> a = context.createBuffer(Usage.Input, aPtr);
         
-        String src = IOUtils.readText(GPUFactor.class.getResource("GPUTest.cl"));
+        String src = IOUtils.readText(Factorisierung.class.getResource("GPUTest.cl"));
         CLProgram program = context.createProgram(src);
         
         System.out.println("Setting up finished!");
@@ -43,12 +81,12 @@ public class GPUFactor {
         CLEvent addEvt = factorKernel.enqueueNDRange(queue, new int[] { n });
         Long endTime = System.currentTimeMillis();
         System.out.println("GPU Programm finished!");
-        System.out.println("Total Time GPU needed: " + (endTime-startTime) + "ms");
         factorKernel.release();
         program.release();
         a.release();
         addEvt.release();
         queue.release();
         context.release();
+        return (endTime-startTime);
 	}
 }
