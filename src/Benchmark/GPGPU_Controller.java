@@ -1,56 +1,67 @@
 package Benchmark;
 
 import java.io.IOException;
+import java.util.Arrays;
+
+import com.nativelibs4java.opencl.CLException;
 
 public class GPGPU_Controller {
 	public static void main(String[] args){
-		boolean wronginput = false;
-		if(!(args.length >= 1)){
-			wronginput =true;
-		}else{
-			if(args[0].equalsIgnoreCase("d")){
-				int[] s = {10,100,1000,10000,100000};
-				bTest(s);
-			}else if(args[0].equalsIgnoreCase("fd")){
-				int[] s = {10,100,1000,10000,100000};
-				fTest(s);
+		try{
+			boolean wronginput = false;
+			if(!(args.length >= 1)){
+				wronginput =true;
+			}else{
+				if(args[0].equalsIgnoreCase("d")){
+					int[] s = {10,100,1000,10000,100000};
+					bTest(s);
+				}else if(args[0].equalsIgnoreCase("fd")){
+					int[] s = {10,100,1000,10000,100000};
+					fTest(s);
+				}
+				else if(args[0].equalsIgnoreCase("sd")){
+					int[] s = {10,100,1000,10000,100000};
+					sTest(s);
+				}else if(args[0].equalsIgnoreCase("b")){
+					int[] s = new int[args.length-1];
+					for(int i = 1; i < args.length;i++)
+						s[i-1] = Integer.parseInt(args[i]);
+					bTest(s);
+				}
+				else if(args[0].equalsIgnoreCase("f")){
+					int[] s = new int[args.length-1];
+					for(int i = 1; i < args.length;i++)
+						s[i-1] = Integer.parseInt(args[i]);
+					fTest(s);
+				}
+				else if(args[0].equalsIgnoreCase("s")){
+					int[] s = new int[args.length-1];
+					for(int i = 1; i < args.length;i++)
+						s[i-1] = Integer.parseInt(args[i]);
+					sTest(s);
+				}else
+					wronginput = true;
 			}
-			else if(args[0].equalsIgnoreCase("sd")){
-				int[] s = {10,100,1000,10000,100000};
-				sTest(s);
-			}else if(args[0].equalsIgnoreCase("b")){
-				int[] s = new int[args.length-1];
-				for(int i = 1; i < args.length;i++)
-					s[i-1] = Integer.parseInt(args[i]);
-				bTest(s);
+			if(wronginput){
+				System.out.println("Please enter one of the following options:");
+				System.out.println("The default options with arraysize 10,100,1000,10000,100000");
+				System.out.println("<d> Testing both algorithm");
+				System.out.println("<fd> Testing the fact algorithm");
+				System.out.println("<sd> Testing the sort algorithm");
+				System.out.println("The custom options with custom arraysizes");
+				System.out.println("<b> [<ArraySize1>..] Testing both algorithm ");
+				System.out.println("<f> [<ArraySize1>..] Testing the fact algorithm");
+				System.out.println("<s> [<ArraySize1>..] Testing the sort algorithm");
 			}
-			else if(args[0].equalsIgnoreCase("f")){
-				int[] s = new int[args.length-1];
-				for(int i = 1; i < args.length;i++)
-					s[i-1] = Integer.parseInt(args[i]);
-				fTest(s);
-			}
-			else if(args[0].equalsIgnoreCase("s")){
-				int[] s = new int[args.length-1];
-				for(int i = 1; i < args.length;i++)
-					s[i-1] = Integer.parseInt(args[i]);
-				sTest(s);
-			}else
-				wronginput = true;
-		}
-		if(wronginput){
-			System.out.println("Please enter one of the following options:");
-			System.out.println("The default options with arraysize 10,100,1000,10000,100000");
-			System.out.println("<d> Testing both algorithm");
-			System.out.println("<fd> Testing the fact algorithm");
-			System.out.println("<sd> Testing the sort algorithm");
-			System.out.println("The custom options with custom arraysizes");
-			System.out.println("<b> [<ArraySize1>..] Testing both algorithm ");
-			System.out.println("<f> [<ArraySize1>..] Testing the fact algorithm");
-			System.out.println("<s> [<ArraySize1>..] Testing the sort algorithm");
+		}catch(NumberFormatException e){
+			System.err.println("Please enter Numbers");
+		}catch(InterruptedException e) {
+			System.err.println("Thread Error!");
+		}catch(CLException e){
+			System.err.println("Out of Ressources!");
 		}
 	}
-	public static void bTest(int[] size){
+	public static void bTest(int[] size) throws InterruptedException{
 		System.out.println("Starting tests");
 		String[] outf = new String[size.length];
 		String[] outs = new String[size.length];
@@ -58,11 +69,13 @@ public class GPGPU_Controller {
 			System.out.println("Starting factor test " + (i+1)+ " with ArraySize: " + size[i]);
 			outf[i]=factor_test(size[i]);
 			System.out.println();
+			Thread.sleep(5000);
 		}
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting sort test " + (i+1)+ " with ArraySize: " + size[i]);
 			outs[i]=sort_test(size[i]);
 			System.out.println();
+			Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for factor tests..");
@@ -75,13 +88,14 @@ public class GPGPU_Controller {
 		}
 		System.out.println("Benchmark finished!");
 	}
-	public static void fTest(int[] size){
+	public static void fTest(int[] size) throws InterruptedException{
 		System.out.println("Starting tests");
 		String[] outf = new String[size.length];
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting factor test " + (i+1)+ " with arraysize: " + size[i]);
 			outf[i]=factor_test(size[i]);
 			System.out.println();
+			Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for factor tests..");
@@ -90,13 +104,14 @@ public class GPGPU_Controller {
 		}		
 		System.out.println("Benchmark finished!");
 	}
-	public static void sTest(int[] size){
+	public static void sTest(int[] size) throws InterruptedException{
 		System.out.println("Starting tests");
 		String[] outs = new String[size.length];
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting sort test " + (i+1)+ " with arraysize: " + size[i]);
 			outs[i]=sort_test(size[i]);
 			System.out.println();
+			Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for sort tests..");
@@ -141,6 +156,7 @@ public class GPGPU_Controller {
 		}
 		cput = outTime(Factorisierung.CPU_factor(todo));
 		System.out.println("Time needed: " + cput);
+		openres(todo);
 		return "CPU: " + cput + " GPU: " + gput;
 	}
 	public static String sort_test(int n){
@@ -163,6 +179,11 @@ public class GPGPU_Controller {
 		}
 		cput = outTime(Sortieren.CPU_sort(todo));
 		System.out.println("Time needed: " + cput);
+		openres(todo);
 		return "CPU: " + cput + " GPU: " + gput;
+	}
+	public static void openres(long[] todo){
+		Arrays.fill(todo, 0);
+		todo =null;
 	}
 }

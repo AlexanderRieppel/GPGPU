@@ -88,6 +88,7 @@ public class Factorisierung {
         a.release();
         addEvt.release();
         queue.release();
+        byteOrder = null;
         context.release();
         return (endTime-startTime);
 	}

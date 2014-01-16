@@ -67,6 +67,7 @@ public class Sortieren {
         a.release();
         addEvt.release();
         queue.release();
+        byteOrder = null;
         context.release();
         return (endTime-startTime);
 	}
