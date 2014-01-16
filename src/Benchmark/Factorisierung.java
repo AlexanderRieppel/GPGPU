@@ -30,6 +30,7 @@ public class Factorisierung {
 //	}
 	public static long CPU_factor(long[] todo){
 		System.out.println("Starting CPU program!");
+		System.out.println("Working...");
 		long startt = System.currentTimeMillis();
 		int i;
 		boolean firstTime = true;
@@ -75,6 +76,7 @@ public class Factorisierung {
         
         //System.out.println("Setting up finished!");
         System.out.println("Starting GPU program!");
+        System.out.println("Working...");
         Long startTime = System.currentTimeMillis();
         CLKernel factorKernel = program.createKernel("factor_test");
         factorKernel.setArgs(a, n);

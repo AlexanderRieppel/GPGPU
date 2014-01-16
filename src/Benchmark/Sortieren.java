@@ -18,6 +18,7 @@ import com.nativelibs4java.util.IOUtils;
 public class Sortieren {
 	public static long CPU_sort(long[] todo){
 		System.out.println("Starting CPU program!");
+		System.out.println("Working...");
 		long startt = System.currentTimeMillis();
 		
 		for (int i = 0; i < todo.length - 1; i++) {
@@ -54,6 +55,7 @@ public class Sortieren {
         
        // System.out.println("Setting up finished!");
         System.out.println("Starting GPU program!");
+        System.out.println("Working...");
         Long startTime = System.currentTimeMillis();
         CLKernel factorKernel = program.createKernel("sort_test");
         factorKernel.setArgs(a, n);
