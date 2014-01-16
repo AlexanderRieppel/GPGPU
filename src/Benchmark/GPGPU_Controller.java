@@ -39,65 +39,65 @@ public class GPGPU_Controller {
 				wronginput = true;
 		}
 		if(wronginput){
-			System.out.println("Please Enter one of the following Options:");
-			System.out.println("The Default Options with ArraySize 10,100,1000,10000,100000");
-			System.out.println("<d> Test bothe Allgorithmen");
-			System.out.println("<fd> Test the Fact Allgorithmen");
-			System.out.println("<sd> Test the Sort Allgorithmen");
-			System.out.println("The Custom Options with custom ArraySizes");
-			System.out.println("<b> [<ArraySize1>..] Test bothe Allgorithmen ");
-			System.out.println("<f> [<ArraySize1>..] Test the Fact Allgorithmen");
-			System.out.println("<s> [<ArraySize1>..] Test the Sort Allgorithmen");
+			System.out.println("Please enter one of the following options:");
+			System.out.println("The default options with arraysize 10,100,1000,10000,100000");
+			System.out.println("<d> Testing both algorithm");
+			System.out.println("<fd> Testing the fact algorithm");
+			System.out.println("<sd> Testing the sort algorithm");
+			System.out.println("The custom options with custom arraysizes");
+			System.out.println("<b> [<ArraySize1>..] Testing both algorithm ");
+			System.out.println("<f> [<ArraySize1>..] Testing the fact algorithm");
+			System.out.println("<s> [<ArraySize1>..] Testing the sort algorithm");
 		}
 	}
 	public static void bTest(int[] size){
-		System.out.println("Starting Tests");
+		System.out.println("Starting tests");
 		String[] outf = new String[size.length];
 		String[] outs = new String[size.length];
 		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting Factor Test " + (i+1)+ " with ArraySize: " + size[i]);
+			System.out.println("Starting factor test " + (i+1)+ " with ArraySize: " + size[i]);
 			outf[i]=factor_test(size[i]);
 		}
 		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting Sort Test " + (i+1)+ " with ArraySize: " + size[i]);
+			System.out.println("Starting sort test " + (i+1)+ " with ArraySize: " + size[i]);
 			outs[i]=sort_test(size[i]);
 		}
-		System.out.println("All Tests Finised!");
-		System.out.println("Showing Results for Factor Tests..");
+		System.out.println("All tests finished!");
+		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
-			System.out.println("Test " + (i+1) + ". with ArraySize " + size[i] + ": " + outf[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outf[i]);
 		}
 		System.out.println("Showing Results for Sort Tests..");
 		for(int i = 0; i < outs.length;i++){
-			System.out.println("Test " + (i+1) + ". with ArraySize " + size[i] + ": " + outs[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outs[i]);
 		}
 		System.out.println("Benchmark finished!");
 	}
 	public static void fTest(int[] size){
-		System.out.println("Starting Tests");
+		System.out.println("Starting tests");
 		String[] outf = new String[size.length];
 		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting Factor Test " + (i+1)+ " with ArraySize: " + size[i]);
+			System.out.println("Starting factor test " + (i+1)+ " with arraysize: " + size[i]);
 			outf[i]=factor_test(size[i]);
 		}
-		System.out.println("All Tests Finised!");
-		System.out.println("Showing Results for Factor Tests..");
+		System.out.println("All tests finished!");
+		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
-			System.out.println("Test " + (i+1) + ". with ArraySize " + size[i] + ": " + outf[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outf[i]);
 		}		
 		System.out.println("Benchmark finished!");
 	}
 	public static void sTest(int[] size){
-		System.out.println("Starting Tests");
+		System.out.println("Starting tests");
 		String[] outs = new String[size.length];
 		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting Sort Test " + (i+1)+ " with ArraySize: " + size[i]);
+			System.out.println("Starting sort test " + (i+1)+ " with arraysize: " + size[i]);
 			outs[i]=sort_test(size[i]);
 		}
-		System.out.println("All Tests Finised!");
-		System.out.println("Showing Results for Sort Tests..");
+		System.out.println("All tests finished!");
+		System.out.println("Showing results for sort tests..");
 		for(int i = 0; i < outs.length;i++){
-			System.out.println("Test " + (i+1) + ". with ArraySize " + size[i] + ": " + outs[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outs[i]);
 		}
 		System.out.println("Benchmark finished!");
 	}
@@ -116,7 +116,7 @@ public class GPGPU_Controller {
 		return ret;
 	}
 	public static String factor_test(int n){
-		System.out.println("Loading Factor Test Programm...");
+		System.out.println("Loading factor test program...");
 		long startt = System.currentTimeMillis();
 		long[] todo = new long[n];
 		long add = (long) (Math.random()*100+1);
@@ -125,40 +125,40 @@ public class GPGPU_Controller {
 			todo[i] = todo[i-1] + add;
 		}
 		long endt = System.currentTimeMillis();
-		System.out.println("Loading Programm finished!");
+		System.out.println("Loading program finished!");
 		System.out.println("Needed " + (endt - startt) + "ms");
 		String gput = "", cput;
 		try {
 			gput = outTime(Factorisierung.GPU_factor(todo));
-			System.out.println("Time Needed: " + gput);
+			System.out.println("Time needed: " + gput);
 		} catch (IOException e) {
-			System.err.println("Error in GPU Test!!");
+			System.err.println("Error in GPU test!!");
 			System.exit(0);
 		}
 		cput = outTime(Factorisierung.CPU_factor(todo));
-		System.out.println("Time Needed: " + cput);
+		System.out.println("Time needed: " + cput);
 		return "CPU: " + cput + " GPU: " + gput;
 	}
 	public static String sort_test(int n){
-		System.out.println("Loading Sort Test Programm...");
+		System.out.println("Loading sort test program...");
 		long startt = System.currentTimeMillis();
 		long[] todo = new long[n];
 		for(int i = 1; i < n; i++){
 			todo[i] =(long) (Math.random()*100+1);
 		}
 		long endt = System.currentTimeMillis();
-		System.out.println("Loading Programm finished!");
+		System.out.println("Loading program finished!");
 		System.out.println("Needed " + (endt - startt) + "ms");
 		String gput = "", cput;
 		try {
 			gput = outTime(Sortieren.GPU_sort(todo));
-			System.out.println("Time Needed: " + gput);
+			System.out.println("Time needed: " + gput);
 		} catch (IOException e) {
 			System.err.println("Error in GPU Test!!");
 			System.exit(0);
 		}
 		cput = outTime(Sortieren.CPU_sort(todo));
-		System.out.println("Time Needed: " + cput);
+		System.out.println("Time needed: " + cput);
 		return "CPU: " + cput + " GPU: " + gput;
 	}
 }
