@@ -29,7 +29,7 @@ public class Factorisierung {
 //		System.out.println("Total time needed: " + (endt-startt) + "ms");
 //	}
 	public static long CPU_factor(long[] todo){
-		System.out.println("Starting CPU Programm!");
+		System.out.println("Starting CPU program!");
 		long startt = System.currentTimeMillis();
 		int i;
 		boolean firstTime = true;
@@ -52,11 +52,11 @@ public class Factorisierung {
 			}
 		}
 		long endt = System.currentTimeMillis();
-		System.out.println("CPU Programm finished!");
+		System.out.println("CPU program finished!");
 		return (endt-startt);
 	}
 	public static long GPU_factor(long[] todo) throws IOException{
-		//System.out.println("Setting up GPU Programm...");
+		//System.out.println("Setting up GPU program...");
 		CLContext context = JavaCL.createBestContext();
         CLQueue queue = context.createDefaultQueue();
         ByteOrder byteOrder = context.getByteOrder();
@@ -74,13 +74,13 @@ public class Factorisierung {
         CLProgram program = context.createProgram(src);
         
         //System.out.println("Setting up finished!");
-        System.out.println("Starting GPU Programm!");
+        System.out.println("Starting GPU program!");
         Long startTime = System.currentTimeMillis();
         CLKernel factorKernel = program.createKernel("factor_test");
         factorKernel.setArgs(a, n);
         CLEvent addEvt = factorKernel.enqueueNDRange(queue, new int[] { n });
         Long endTime = System.currentTimeMillis();
-        System.out.println("GPU Programm finished!");
+        System.out.println("GPU program finished!");
         factorKernel.release();
         program.release();
         a.release();
