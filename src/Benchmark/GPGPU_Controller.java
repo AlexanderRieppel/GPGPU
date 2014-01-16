@@ -130,7 +130,7 @@ public class GPGPU_Controller {
 		}
 		long endt = System.currentTimeMillis();
 		System.out.println("Loading program finished!");
-		System.out.println("Needed " + (endt - startt) + "ms");
+		System.out.println("This took " + (endt - startt) + "ms");
 		String gput = "", cput;
 		try {
 			gput = outTime(Factorisierung.GPU_factor(todo));
@@ -152,7 +152,7 @@ public class GPGPU_Controller {
 		}
 		long endt = System.currentTimeMillis();
 		System.out.println("Loading program finished!");
-		System.out.println("Needed " + (endt - startt) + "ms");
+		System.out.println("This took " + (endt - startt) + "ms");
 		String gput = "", cput;
 		try {
 			gput = outTime(Sortieren.GPU_sort(todo));
