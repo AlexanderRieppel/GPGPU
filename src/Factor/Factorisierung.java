@@ -2,7 +2,7 @@ package Factor;
 
 public class Factorisierung {
 	public static void main(String[] args) {
-		int zuTeilen = 195;
+		int zuTeilen = (int) (Math.random()*100+1);
 		int n = 100000;
 		long startt = System.currentTimeMillis();
 		for(int i = 0; i< n;i++){
