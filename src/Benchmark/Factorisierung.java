@@ -56,7 +56,7 @@ public class Factorisierung {
 		return (endt-startt);
 	}
 	public static long GPU_factor(long[] todo) throws IOException{
-		System.out.println("Setting up GPU Programm...");
+		//System.out.println("Setting up GPU Programm...");
 		CLContext context = JavaCL.createBestContext();
         CLQueue queue = context.createDefaultQueue();
         ByteOrder byteOrder = context.getByteOrder();
@@ -73,7 +73,7 @@ public class Factorisierung {
         String src = IOUtils.readText(Factorisierung.class.getResource("GPUTest.cl"));
         CLProgram program = context.createProgram(src);
         
-        System.out.println("Setting up finished!");
+        //System.out.println("Setting up finished!");
         System.out.println("Starting GPU Programm!");
         Long startTime = System.currentTimeMillis();
         CLKernel factorKernel = program.createKernel("factor_test");
