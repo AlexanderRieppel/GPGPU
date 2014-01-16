@@ -9,7 +9,7 @@ public class GPGPU_Controller {
 			wronginput =true;
 		}else{
 			if(args[0].equalsIgnoreCase("d")){
-				int[] s = {10,100,1000,10000};
+				int[] s = {10,100,1000,10000,100000};
 				bTest(s);
 			}else if(args[0].equalsIgnoreCase("fd")){
 				int[] s = {10,100,1000,10000,100000};
@@ -19,22 +19,22 @@ public class GPGPU_Controller {
 				int[] s = {10,100,1000,10000,100000};
 				sTest(s);
 			}else if(args[0].equalsIgnoreCase("b")){
-				int[] s = new int[args.length-2];
+				int[] s = new int[args.length-1];
 				for(int i = 1; i < args.length;i++)
-					s[i] = Integer.parseInt(args[i]);
+					s[i-1] = Integer.parseInt(args[i]);
 				bTest(s);
 			}
 			else if(args[0].equalsIgnoreCase("f")){
-				int[] s = new int[args.length-2];
+				int[] s = new int[args.length-1];
 				for(int i = 1; i < args.length;i++)
-					s[i] = Integer.parseInt(args[i]);
-				bTest(s);
+					s[i-1] = Integer.parseInt(args[i]);
+				fTest(s);
 			}
 			else if(args[0].equalsIgnoreCase("s")){
-				int[] s = new int[args.length-2];
+				int[] s = new int[args.length-1];
 				for(int i = 1; i < args.length;i++)
-					s[i] = Integer.parseInt(args[i]);
-				bTest(s);
+					s[i-1] = Integer.parseInt(args[i]);
+				sTest(s);
 			}else
 				wronginput = true;
 		}
