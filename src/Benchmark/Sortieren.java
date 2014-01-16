@@ -17,7 +17,7 @@ import com.nativelibs4java.util.IOUtils;
 
 public class Sortieren {
 	public static long CPU_sort(long[] todo){
-		System.out.println("Starting CPU Programm!");
+		System.out.println("Starting CPU program!");
 		long startt = System.currentTimeMillis();
 		
 		for (int i = 0; i < todo.length - 1; i++) {
@@ -31,11 +31,11 @@ public class Sortieren {
 		}
 		
 		long endt = System.currentTimeMillis();
-		System.out.println("CPU Programm finished!");
+		System.out.println("CPU program finished!");
 		return (endt-startt);
 	}
 	public static long GPU_sort(long[] todo) throws IOException{
-		//System.out.println("Setting up GPU Programm...");
+		//System.out.println("Setting up GPU program...");
 		CLContext context = JavaCL.createBestContext();
         CLQueue queue = context.createDefaultQueue();
         ByteOrder byteOrder = context.getByteOrder();
@@ -53,13 +53,13 @@ public class Sortieren {
         CLProgram program = context.createProgram(src);
         
        // System.out.println("Setting up finished!");
-        System.out.println("Starting GPU Programm!");
+        System.out.println("Starting GPU program!");
         Long startTime = System.currentTimeMillis();
         CLKernel factorKernel = program.createKernel("sort_test");
         factorKernel.setArgs(a, n);
         CLEvent addEvt = factorKernel.enqueueNDRange(queue, new int[] { n });
         Long endTime = System.currentTimeMillis();
-        System.out.println("GPU Programm finished!");
+        System.out.println("GPU program finished!");
         factorKernel.release();
         program.release();
         a.release();
