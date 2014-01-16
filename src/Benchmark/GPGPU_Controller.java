@@ -57,10 +57,12 @@ public class GPGPU_Controller {
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting factor test " + (i+1)+ " with ArraySize: " + size[i]);
 			outf[i]=factor_test(size[i]);
+			System.out.println();
 		}
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting sort test " + (i+1)+ " with ArraySize: " + size[i]);
 			outs[i]=sort_test(size[i]);
+			System.out.println();
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for factor tests..");
@@ -79,6 +81,7 @@ public class GPGPU_Controller {
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting factor test " + (i+1)+ " with arraysize: " + size[i]);
 			outf[i]=factor_test(size[i]);
+			System.out.println();
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for factor tests..");
@@ -93,6 +96,7 @@ public class GPGPU_Controller {
 		for(int i = 0; i < size.length;i++){
 			System.out.println("Starting sort test " + (i+1)+ " with arraysize: " + size[i]);
 			outs[i]=sort_test(size[i]);
+			System.out.println();
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for sort tests..");
