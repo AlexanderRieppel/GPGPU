@@ -204,7 +204,7 @@ public class GPGPU_Controller {
 		long startt = System.currentTimeMillis();
 		long[] todo = new long[n];
 		for(int i = 1; i < n; i++){
-			todo[i] =(long) (Math.random()*100+1);
+			todo[i] =(long) (Math.random()*1000000+1);
 		}
 		long endt = System.currentTimeMillis();
 		System.out.println("Loading program finished!");
