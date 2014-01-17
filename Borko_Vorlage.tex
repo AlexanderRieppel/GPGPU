@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{scrreprt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{tabu}
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+\begin{document}
+
+
+%\titlehead{Kopf} %Optionale Kopfzeile
+\author{Dominik Backhausen \and Alexander Rieppel} %Zwei Autoren
+\title{Protokoll} %Titel/Thema
+\subject{VSDB} %Fach
+\subtitle{GPGPU} %Genaueres Thema, Optional
+\date{\today} %Datum
+\publishers{5AHITT} %Klasse
+
+\maketitle
+\tableofcontents
+
+
+\chapter{Aufgabenstellung}
+	GPU Computing oder GPGPU(= General Purpose Computing on GPUs) bezeichnet die Verwendung eines Grafikprozessors (engl. Graphics Processing Unit oder GPU) für allgemeine Berechnungen im wissenschaftlich-technischen Bereich. Übersetzt bedeutet GPGPU in etwa Allgemeine Berechnung auf Grafikprozessoren.\\\\
+	
+	Informieren Sie sich über die Möglichkeiten der Nutzung von GPUs in normalen Anwendungen. Zeigen Sie dazu im Gegensatz den Vorteil der GPUs in rechenintensiven Implementierungen auf [1Pkt]. Gibt es Entwicklungsumgebungen und in welchen Programmiersprachen kann man diese nutzen [1Pkt]? Können bestehende Programme (C und Java) auf GPUs genutzt werden und was sind dabei die Grundvoraussetzungen dafür [1Pkt]? Gibt es transcompiler und wie kommen diese zum Einsatz [1Pkt]?\\\\
+	
+	Präsentieren Sie an einem praktischen Beispiel den Nutzen dieser Technologie. Wählen Sie zwei rechenintensive Algorithmen (z.B. Faktorisierung) und zeigen Sie in einem Benchmark welche Vorteile der Einsatz der vorhandenen GPU Hardware bringt [12Pkt]! Um auch einen Vergleich auf verschiedenen Platformen zu gewährleisten, bietet sich die Verwendung von OpenCL an.\\\\
+	
+	Diese Aufgabe ist als Gruppenarbeit (2) zu lösen. Es ist zu beachten, dass diese Aufgabe mit der Aufgabe05 gekoppelt ist, d.h. nur eine der beiden Aufgaben wird verpflichtend bewertet! Zusätzliche Abgaben erhöhen die Gesamtpunkte und können somit zur Notenverbesserung dienen.
+\chapter{Recherche}
+	\section{Nutzung von GPUs und Vorteil gegenüber CPU}
+		GPUs können vor allem sehr gut mit parallelisierbaren Algorithmen Arbeiten, da sie weit mehr Kerne besitzen, als eine CPU. Die GPU ist daher besonders für wiederholende und gleichzeitig rechenintensive Aufgaben geeignet und bei diesen auch deutlich schneller. Die GPU zieht erst bei oft wechselnden und ausschließlich sequentiell abzuarbeitenden Aufgaben den Kürzeren.
+	\section{Entwicklungsumgebungen}
+		
+	\section{Nutzung von bestehenden Programmen (C und Java)}
+		
+	\section{Transcompiler}
+		
+\chapter{Arbeitsaufteilung}
+	\tabulinesep = 4pt
+	\begin{tabu}  {|[2pt]X[2.5,c] |[1pt] X[4,c] |[1pt]X[1.3,c]|[1pt]X[c]|[2pt]}
+		\tabucline[2pt]{-}
+		Name & Arbeitssegment & Time Estimated & Time Spent\\\tabucline[2pt]{-}
+		
+		Alexander Rieppel & Dokumentation & 1h & 1h\\\tabucline[1pt]{-}
+		Alexander Rieppel & Recherche & 1h & 1h\\\tabucline[1pt]{-}
+		Alexander Rieppel & Algorithmensuche & 1h & 1h \\\tabucline[1pt]{-}
+		Alexander Rieppel & Kernel & 2h & 2h \\\tabucline[1pt]{-}
+		Dominik Backhausen & Kernel & 2h & 3h\\\tabucline[1pt]{-}
+		Dominik Backhausen & Benchmarkprogramm & 2h & 3h\\\tabucline[2pt]{-}
+		Gesamt && 7h & 11h \\\tabucline[2pt]{-}
+		
+	\end{tabu}
+\chapter{Arbeitsdurchführung}
+	
+\chapter{Testbericht}
+	
+
+\end{document}
