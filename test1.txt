@@ -1,0 +1,205 @@
+Tests run on:
+Cayman
+AMD Phenom(tm) II X6 1100T Processor
+
+Starting tests
+Starting factor test 1 with ArraySize: 10
+Loading factor test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 88.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 0.0ms
+
+Starting factor test 2 with ArraySize: 50
+Loading factor test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 85.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 3.0ms
+
+Starting factor test 3 with ArraySize: 100
+Loading factor test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 102.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 1.0ms
+
+Starting factor test 4 with ArraySize: 500
+Loading factor test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 112.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 19.0ms
+
+Starting factor test 5 with ArraySize: 1000
+Loading factor test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 83.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 150.0ms
+
+Starting factor test 6 with ArraySize: 5000
+Loading factor test program...
+Loading program finished!
+This took 1ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 86.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 30.0ms
+
+Starting factor test 7 with ArraySize: 10000
+Loading factor test program...
+Loading program finished!
+This took 1ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 81.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 3.268s (3268ms)
+
+Starting sort test 1 with ArraySize: 10
+Loading sort test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 104.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 0.0ms
+
+Starting sort test 2 with ArraySize: 50
+Loading sort test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 108.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 0.0ms
+
+Starting sort test 3 with ArraySize: 100
+Loading sort test program...
+Loading program finished!
+This took 0ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 99.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 0.0ms
+
+Starting sort test 4 with ArraySize: 500
+Loading sort test program...
+Loading program finished!
+This took 1ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 86.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 4.0ms
+
+Starting sort test 5 with ArraySize: 1000
+Loading sort test program...
+Loading program finished!
+This took 2ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 83.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 1.0ms
+
+Starting sort test 6 with ArraySize: 5000
+Loading sort test program...
+Loading program finished!
+This took 10ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 98.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 25.0ms
+
+Starting sort test 7 with ArraySize: 10000
+Loading sort test program...
+Loading program finished!
+This took 2ms
+Starting GPU program!
+Working...
+GPU program finished!
+Time needed: 76.0ms
+Starting CPU program!
+Working...
+CPU program finished!
+Time needed: 104.0ms
+
+All tests finished!
+Showing results for factor tests..
+Test 1. with arraysize 10: CPU: 0.0ms GPU: 88.0ms
+Test 2. with arraysize 50: CPU: 3.0ms GPU: 85.0ms
+Test 3. with arraysize 100: CPU: 1.0ms GPU: 102.0ms
+Test 4. with arraysize 500: CPU: 19.0ms GPU: 112.0ms
+Test 5. with arraysize 1000: CPU: 150.0ms GPU: 83.0ms
+Test 6. with arraysize 5000: CPU: 30.0ms GPU: 86.0ms
+Test 7. with arraysize 10000: CPU: 3.268s (3268ms) GPU: 81.0ms
+Showing Results for Sort Tests..
+Test 1. with arraysize 10: CPU: 0.0ms GPU: 104.0ms
+Test 2. with arraysize 50: CPU: 0.0ms GPU: 108.0ms
+Test 3. with arraysize 100: CPU: 0.0ms GPU: 99.0ms
+Test 4. with arraysize 500: CPU: 4.0ms GPU: 86.0ms
+Test 5. with arraysize 1000: CPU: 1.0ms GPU: 83.0ms
+Test 6. with arraysize 5000: CPU: 25.0ms GPU: 98.0ms
+Test 7. with arraysize 10000: CPU: 104.0ms GPU: 76.0ms
+Benchmark finished!
