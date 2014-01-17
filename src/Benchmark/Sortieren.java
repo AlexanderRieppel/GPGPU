@@ -61,14 +61,16 @@ public class Sortieren {
         factorKernel.setArgs(a, n);
         CLEvent addEvt = factorKernel.enqueueNDRange(queue, new int[] { n });
         Long endTime = System.currentTimeMillis();
-        System.out.println("GPU program finished!");
+        
+        addEvt.release();
         factorKernel.release();
         program.release();
         a.release();
-        addEvt.release();
+        aPtr.clearValidBytes();
+        aPtr.release();
         queue.release();
-        byteOrder = null;
         context.release();
+        System.out.println("GPU program finished!");
         return (endTime-startTime);
 	}
 }

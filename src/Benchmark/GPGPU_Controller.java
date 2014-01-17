@@ -13,14 +13,14 @@ public class GPGPU_Controller {
 				wronginput =true;
 			}else{
 				if(args[0].equalsIgnoreCase("d")){
-					int[] s = {10,100,1000,10000,100000};
+					int[] s = {10,100,1000,5000,10000};
 					bTest(s);
 				}else if(args[0].equalsIgnoreCase("fd")){
-					int[] s = {10,100,1000,10000,100000};
+					int[] s = {10,100,1000,5000,10000};
 					fTest(s);
 				}
 				else if(args[0].equalsIgnoreCase("sd")){
-					int[] s = {10,100,1000,10000,100000};
+					int[] s = {10,100,1000,5000,10000};
 					sTest(s);
 				}else if(args[0].equalsIgnoreCase("b")){
 					int[] s = new int[args.length-1];
