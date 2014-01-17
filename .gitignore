@@ -5,6 +5,11 @@
 *.war
 *.ear
 /bin
-.gitignore
 .classpath
 .project
+*.gz
+*.aux
+*.log
+*.toc
+*.db
+
