@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{lmodern}
 \usepackage{listings}
+\usepackage{multirow}
 
 \begin{document}
 
@@ -42,17 +43,20 @@
 		
 \chapter{Arbeitsaufteilung}
 	\tabulinesep = 4pt
-	\begin{tabu}  {|[2pt]X[2.5,c] |[1pt] X[4,c] |[1pt]X[1.3,c]|[1pt]X[c]|[2pt]}
-		\tabucline[2pt]{-}
-		Name & Arbeitssegment & Time Estimated & Time Spent\\\tabucline[2pt]{-}
+	\begin{tabu}  {||c|c|c|c|c||}
+		\tabucline[4pt]{-}
+		 & \multicolumn{2}{c|}{Backhausen Dominik} & \multicolumn{2}{c||}{Rieppel Alexander}\\\tabucline[1pt]{2-}
+		 Arbeitssegment&Estimated T. & Spent T. &Estimated T. & Spent T.\\\tabucline[2pt]{-}
 		
-		Alexander Rieppel & Dokumentation & 1h & 1h\\\tabucline[1pt]{-}
-		Alexander Rieppel & Recherche & 1h & 1h\\\tabucline[1pt]{-}
-		Alexander Rieppel & Algorithmensuche & 1h & 1h \\\tabucline[1pt]{-}
-		Alexander Rieppel & Kernel & 2h & 2h \\\tabucline[1pt]{-}
-		Dominik Backhausen & Kernel & 2h & 3h\\\tabucline[1pt]{-}
-		Dominik Backhausen & Benchmarkprogramm & 2h & 3h\\\tabucline[2pt]{-}
-		Gesamt && 7h & 11h \\\tabucline[2pt]{-}
+		 Dokumentation 		& 0h 	& 0h	& 1h	& 1h	\\\tabucline[1pt]{-}
+		 Recherche 			& 0h 	& 0h	& 1h	& 1h	\\\tabucline[1pt]{-}
+		 Algorithmensuche 	& 1h 	& 0.5h 	& 1h	& 1h	\\\tabucline[1pt]{-}
+		 Kernel 			& 2h 	& 3h 	& 2h	& 2h	\\\tabucline[1pt]{-}
+		 Benchmarkprogramm 	& 2h 	& 3h	& 0.5h	& 1h	\\\tabucline[2pt]{-}
+		 Gesamt 			& 5h	& 6.5h 	& 5.5h	& 6h	\\\tabucline[3pt]{-}
+		 
+		 &\multicolumn{2}{c|}{Estimated T.}&\multicolumn{2}{c||}{Spent T.}\\\tabucline[1pt]{2-}
+		 Gesamtes Team&\multicolumn{2}{c|}{10.5h}&\multicolumn{2}{c||}{12.5h}\\\tabucline[4pt]{-}
 		
 	\end{tabu}
 \chapter{Arbeitsdurchführung}
