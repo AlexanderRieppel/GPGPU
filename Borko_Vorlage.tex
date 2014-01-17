@@ -6,6 +6,7 @@
 \usepackage{tabu}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{listings}
 
 \begin{document}
 
@@ -34,10 +35,10 @@
 	\section{Nutzung von GPUs und Vorteil gegenüber CPU}
 		GPUs können vor allem sehr gut mit parallelisierbaren Algorithmen Arbeiten, da sie weit mehr Kerne besitzen, als eine CPU. Die GPU ist daher besonders für wiederholende und gleichzeitig rechenintensive Aufgaben geeignet und bei diesen auch deutlich schneller. Die GPU zieht erst bei oft wechselnden und ausschließlich sequentiell abzuarbeitenden Aufgaben den Kürzeren.
 	\section{Entwicklungsumgebungen}
-		
-	\section{Nutzung von bestehenden Programmen (C und Java)}
+		Vor kurzem wurde von AMD die Ati Stream SDK 2.0 veröffentlicht, diese ist nicht nur auf GPUs sondern auch auf CPUs lauffähig (auch von Intel). Neben dem Arbeiten in C, ist es allerdings auch möglich mit Eclipse, in Java zu arbeiten. Man benötigt dazu lediglich, die Bibliothek javaCL. 
 		
 	\section{Transcompiler}
+		Ja es gibt transcompiler die bespielsweise von OpenCL auf CUDA kompilieren können.
 		
 \chapter{Arbeitsaufteilung}
 	\tabulinesep = 4pt
@@ -57,6 +58,41 @@
 \chapter{Arbeitsdurchführung}
 	
 \chapter{Testbericht}
+Nachdem unser Programm fertig geschrieben war haben wir mit den Benchmarks begonnen.
+
+\subsection{Test 1}
+Wir haben einen Test auf den Heimrechner von Dominik Backhausen durchgeführt.\newline
+In diesem Computer befindet sich folgende HW:\newline
+CPU: AMD Phenom(tm) II X6 1100T Processor (6 Kerne, jeweils 3,30 GHz)
+GPU: AMD Radeon HD 6900 Series
+
+\lstinputlisting{test1.txt}
+Aus diesem Test kann man schließen das der Algorithmus Faktorisieren eindeutig besser Parallelisierbar ist.
+Sowie das der Wechsel dieses Algorithmus erst einer Anzahl von 1000 Elementen in einer Liste passiert.
+Nach diesem Wechsel benötigt die GPU nur einwenig länger um den Algorithmus zu beenden, die geschwindichkeit der CPU nimmt allerdings deutlich ab.\newline
+Jedoch ist deutlich zu beachten das bei dem anderen Algorithmus bei einer anzahl von 10.000 Elementen die CPU gerade mal gleich schnell ist wie die GPU.
+
+\subsection{Test 2}
+Wir haben einen Test auf den Laptop von Dominik Backhausen durchgeführt.\newline
+In diesem Computer befindet sich folgende HW:\newline
+CPU: Intel(R) Core(TM) i5 (2 Kerne , jeweils 2,50 GHz)
+GPU: NVIDIA GeForce GT 330M
+
+\lstinputlisting{test2.txt}
+Hier findet der Wechsel jedoch früher statt. Da ab einer Anzahl von 500 Elementen die CPU auf einmal langsamer ist als die GPU.
+Bei dem Sort Algorithmus findet ein Wechsel diesmal auch erst bei 5000 Elementen statt.
+
+\subsection{Tests Vergleich}
+
+Die die AMD Radeon HD 6900 eigentlich stärker ist als die NVIDIA GeForce GT 330M und trotzdem die NVIDIA um gut 70ms schneller ist beim verarbeiten dieser Algorithmen kamen wir zu dem Entschluss das entweder der Treiber von der AMD nicht ganz aktuell ist oder das AMD GPU's der Readon Serie nicht besonders gut mit OpenCl kompatible sind.\newline
+Des Weiteren sieht man allerdings das speziell bei diesen Algorithmen eine CPU mit 4 Kernen mehr und um 0.7 GHz mehr pro Kern nicht nenenswert bessere Ergebnisse erzielt.
+
+
+\chapter{Quellen}
+
+$http://ht4u.net/news/21412_erste_finale_opencl-entwicklungsumgebung_von_amd_verfuegbar/\\\\
+$https://code.google.com/p/javacl/
+
 	
 
 \end{document}
