@@ -14,8 +14,17 @@ import com.nativelibs4java.opencl.CLQueue;
 import com.nativelibs4java.opencl.JavaCL;
 import com.nativelibs4java.opencl.CLMem.Usage;
 import com.nativelibs4java.util.IOUtils;
-
+/**
+ * This class contains the static methods to tests the sort algorithm on GPU and CPU
+ * @author Dominik Backhausen, Alexander Rieppel
+ *
+ */
 public class Sortieren {
+	/**
+	 * CPU factor test
+	 * @param todo array to test
+	 * @return
+	 */
 	public static long CPU_sort(long[] todo){
 		System.out.println("Starting CPU program!");
 		System.out.println("Working...");
@@ -35,6 +44,11 @@ public class Sortieren {
 		System.out.println("CPU program finished!");
 		return (endt-startt);
 	}
+	/**
+	 * GPU factor test
+	 * @param todo array to test
+	 * @return
+	 */
 	public static long GPU_sort(long[] todo) throws IOException{
 		//System.out.println("Setting up GPU program...");
 		CLContext context = JavaCL.createBestContext();

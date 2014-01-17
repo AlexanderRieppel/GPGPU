@@ -15,7 +15,11 @@ import com.nativelibs4java.opencl.CLQueue;
 import com.nativelibs4java.opencl.JavaCL;
 import com.nativelibs4java.opencl.CLMem.Usage;
 import com.nativelibs4java.util.IOUtils;
-
+/**
+ * This class contains the static methods to tests the factor algorithm on GPU and CPU
+ * @author Dominik Backhausen, Alexander Rieppel
+ *
+ */
 public class Factorisierung {
 //	public static void main(String[] args) {
 //		int zuTeilen = (int) (Math.random()*100+1);
@@ -28,6 +32,11 @@ public class Factorisierung {
 //		long endt = System.currentTimeMillis();
 //		System.out.println("Total time needed: " + (endt-startt) + "ms");
 //	}
+	/**
+	 * CPU factor test
+	 * @param todo array to test
+	 * @return
+	 */
 	public static long CPU_factor(long[] todo){
 		System.out.println("Starting CPU program!");
 		System.out.println("Working...");
@@ -56,6 +65,11 @@ public class Factorisierung {
 		System.out.println("CPU program finished!");
 		return (endt-startt);
 	}
+	/**
+	 * GPU factor test
+	 * @param todo array to test
+	 * @return
+	 */
 	public static long GPU_factor(long[] todo) throws IOException{
 		//System.out.println("Setting up GPU program...");
 		CLContext context = JavaCL.createBestContext();

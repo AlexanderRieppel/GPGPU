@@ -3,8 +3,15 @@ package Benchmark;
 import java.io.IOException;
 import java.util.Arrays;
 
+import com.nativelibs4java.opencl.CLDevice;
+import com.nativelibs4java.opencl.CLDevice.Type;
 import com.nativelibs4java.opencl.CLException;
-
+import com.nativelibs4java.opencl.CLPlatform;
+import com.nativelibs4java.opencl.JavaCL;
+/**
+ * This Class Manages the userinput and controlls the tests
+ * @author Dominik Backhausen, Alexander Rieppel
+ */
 public class GPGPU_Controller {
 	public static void main(String[] args){
 		try{
@@ -13,14 +20,14 @@ public class GPGPU_Controller {
 				wronginput =true;
 			}else{
 				if(args[0].equalsIgnoreCase("d")){
-					int[] s = {10,100,1000,5000,10000};
+					int[] s = {10,50,100,500,1000,5000,10000};
 					bTest(s);
 				}else if(args[0].equalsIgnoreCase("fd")){
-					int[] s = {10,100,1000,5000,10000};
+					int[] s = {10,50,100,500,1000,5000,10000};
 					fTest(s);
 				}
 				else if(args[0].equalsIgnoreCase("sd")){
-					int[] s = {10,100,1000,5000,10000};
+					int[] s = {10,50,100,500,1000,5000,10000};
 					sTest(s);
 				}else if(args[0].equalsIgnoreCase("b")){
 					int[] s = new int[args.length-1];
@@ -44,7 +51,7 @@ public class GPGPU_Controller {
 			}
 			if(wronginput){
 				System.out.println("Please enter one of the following options:");
-				System.out.println("The default options with arraysize 10,100,1000,10000,100000");
+				System.out.println("The default options with arraysize 10,50,100,500,1000,5000,10000");
 				System.out.println("<d> Testing both algorithm");
 				System.out.println("<fd> Testing the fact algorithm");
 				System.out.println("<sd> Testing the sort algorithm");
@@ -61,7 +68,13 @@ public class GPGPU_Controller {
 			System.err.println("Out of Ressources!");
 		}
 	}
+	/**
+	 * This Tests both test types
+	 * @param size sizes of the Test Arrays
+	 * @throws InterruptedException
+	 */
 	public static void bTest(int[] size) throws InterruptedException{
+		showHW();
 		System.out.println("Starting tests");
 		String[] outf = new String[size.length];
 		String[] outs = new String[size.length];
@@ -88,7 +101,13 @@ public class GPGPU_Controller {
 		}
 		System.out.println("Benchmark finished!");
 	}
+	/**
+	 * This runs only the factor test
+	 * @param size sizes of the Test Arrays
+	 * @throws InterruptedException
+	 */
 	public static void fTest(int[] size) throws InterruptedException{
+		showHW();
 		System.out.println("Starting tests");
 		String[] outf = new String[size.length];
 		for(int i = 0; i < size.length;i++){
@@ -104,7 +123,13 @@ public class GPGPU_Controller {
 		}		
 		System.out.println("Benchmark finished!");
 	}
+	/**
+	 * This runs only the sort test
+	 * @param size sizes of the Test Arrays
+	 * @throws InterruptedException
+	 */
 	public static void sTest(int[] size) throws InterruptedException{
+		showHW();
 		System.out.println("Starting tests");
 		String[] outs = new String[size.length];
 		for(int i = 0; i < size.length;i++){
@@ -120,6 +145,11 @@ public class GPGPU_Controller {
 		}
 		System.out.println("Benchmark finished!");
 	}
+	/**
+	 * This convert ms to ms, s  or m
+	 * @param timeneed time to convert
+	 * @return converted time
+	 */
 	public static String outTime(long timeneed){
 		String ret;
 		double time=(double)timeneed;
@@ -134,6 +164,11 @@ public class GPGPU_Controller {
 			ret= time + "ms";
 		return ret;
 	}
+	/**
+	 * This is one factor test
+	 * @param n size of the List
+	 * @return
+	 */
 	public static String factor_test(int n){
 		System.out.println("Loading factor test program...");
 		long startt = System.currentTimeMillis();
@@ -159,6 +194,11 @@ public class GPGPU_Controller {
 		openres(todo);
 		return "CPU: " + cput + " GPU: " + gput;
 	}
+	/**
+	 * This is one sort test
+	 * @param n size of the List
+	 * @return
+	 */
 	public static String sort_test(int n){
 		System.out.println("Loading sort test program...");
 		long startt = System.currentTimeMillis();
@@ -182,8 +222,22 @@ public class GPGPU_Controller {
 		openres(todo);
 		return "CPU: " + cput + " GPU: " + gput;
 	}
+	/**
+	 * This sould open the Ressources
+	 * @param todo
+	 */
 	public static void openres(long[] todo){
 		Arrays.fill(todo, 0);
 		todo =null;
+	}
+	/**
+	 * This show the HW on which the test is running
+	 */
+	public static void showHW(){
+		System.out.println("Tests run on:");
+		for(CLPlatform p : JavaCL.listPlatforms())
+			for(CLDevice d1 :p.listAllDevices(false))
+				System.out.println(d1.getName());
+		System.out.println();
 	}
 }
