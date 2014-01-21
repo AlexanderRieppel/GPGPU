@@ -26,12 +26,12 @@ public class GPGPU_Controller {
 				wronginput =true;
 			}else{
 				if(args[0].equalsIgnoreCase("d")){
-					bTest(1000,5000);
+					bTest(50,5000);
 				}else if(args[0].equalsIgnoreCase("fd")){
-					fTest(1000,5000);
+					fTest(50,5000);
 				}
 				else if(args[0].equalsIgnoreCase("sd")){
-					sTest(1000,5000);
+					sTest(50,5000);
 				}else if(args[0].equalsIgnoreCase("b")){
 					int n = Integer.parseInt(args[1]);
 					int size = Integer.parseInt(args[2]);
@@ -51,7 +51,7 @@ public class GPGPU_Controller {
 			}
 			if(wronginput){
 				System.out.println("Please enter one of the following options:");
-				System.out.println("The default options with 1000 Tests(N) and 5000 ArraySize");
+				System.out.println("The default options with 50 Tests(N) and 5000 ArraySize");
 				System.out.println("<d> Testing both algorithm");
 				System.out.println("<fd> Testing the fact algorithm");
 				System.out.println("<sd> Testing the sort algorithm");
@@ -90,19 +90,22 @@ public class GPGPU_Controller {
 			System.out.println();
 			//Thread.sleep(5000);
 		}
-		System.out.println("All tests finished!\n");
+		System.out.println("All tests finished!");
+		System.out.println();
 		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outf[i]);
 		}
 		System.out.println("Average Time GPU: " + outTime((timefg/n)));
-		System.out.println("Average Time CPU: " + outTime((timefc/n)) + "\n");
+		System.out.println("Average Time CPU: " + outTime((timefc/n)));
+		System.out.println();
 		System.out.println("Showing Results for Sort Tests..");
 		for(int i = 0; i < outs.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outs[i]);
 		}
 		System.out.println("Average Time GPU: " + outTime((timesg/n)));
-		System.out.println("Average Time CPU: " + outTime((timesc/n)) + "\n");
+		System.out.println("Average Time CPU: " + outTime((timesc/n)));
+		System.out.println();
 		System.out.println("Overall Programm runtime: " + outTime((System.currentTimeMillis()-startp)));
 		System.out.println("Benchmark finished!");
 	}
@@ -122,12 +125,14 @@ public class GPGPU_Controller {
 			//Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
+		System.out.println();
 		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outf[i]);
 		}
 		System.out.println("Average Time GPU: " + outTime((timefg/n)));
-		System.out.println("Average Time CPU: " + outTime((timefc/n)) + "\n");
+		System.out.println("Average Time CPU: " + outTime((timefc/n)));
+		System.out.println();
 		System.out.println("Overall Programm runtime: " + outTime((System.currentTimeMillis()-startp)));
 		System.out.println("Benchmark finished!");
 	}
@@ -147,12 +152,14 @@ public class GPGPU_Controller {
 			//Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
+		System.out.println();
 		System.out.println("Showing results for sort tests..");
 		for(int i = 0; i < outs.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outs[i]);
 		}
 		System.out.println("Average Time GPU: " + outTime((timesg/n)));
-		System.out.println("Average Time CPU: " + outTime((timesc/n)) + "\n");
+		System.out.println("Average Time CPU: " + outTime((timesc/n)));
+		System.out.println();
 		System.out.println("Overall Programm runtime: " + outTime((System.currentTimeMillis()-startp)));
 		System.out.println("Benchmark finished!");
 	}
