@@ -13,52 +13,48 @@ import com.nativelibs4java.opencl.JavaCL;
  * @author Dominik Backhausen, Alexander Rieppel
  */
 public class GPGPU_Controller {
+	private static long startp;
 	public static void main(String[] args){
+		startp = System.currentTimeMillis();
 		try{
 			boolean wronginput = false;
 			if(!(args.length >= 1)){
 				wronginput =true;
 			}else{
 				if(args[0].equalsIgnoreCase("d")){
-					int[] s = {10,50,100,500,1000,5000,10000};
-					bTest(s);
+					bTest(1000,5000);
 				}else if(args[0].equalsIgnoreCase("fd")){
-					int[] s = {10,50,100,500,1000,5000,10000};
-					fTest(s);
+					fTest(1000,5000);
 				}
 				else if(args[0].equalsIgnoreCase("sd")){
-					int[] s = {10,50,100,500,1000,5000,10000};
-					sTest(s);
+					sTest(1000,5000);
 				}else if(args[0].equalsIgnoreCase("b")){
-					int[] s = new int[args.length-1];
-					for(int i = 1; i < args.length;i++)
-						s[i-1] = Integer.parseInt(args[i]);
-					bTest(s);
+					int n = Integer.parseInt(args[1]);
+					int size = Integer.parseInt(args[2]);
+					bTest(n,size);
 				}
 				else if(args[0].equalsIgnoreCase("f")){
-					int[] s = new int[args.length-1];
-					for(int i = 1; i < args.length;i++)
-						s[i-1] = Integer.parseInt(args[i]);
-					fTest(s);
+					int n = Integer.parseInt(args[1]);
+					int size = Integer.parseInt(args[2]);
+					fTest(n,size);
 				}
 				else if(args[0].equalsIgnoreCase("s")){
-					int[] s = new int[args.length-1];
-					for(int i = 1; i < args.length;i++)
-						s[i-1] = Integer.parseInt(args[i]);
-					sTest(s);
+					int n = Integer.parseInt(args[1]);
+					int size = Integer.parseInt(args[2]);
+					sTest(n,size);
 				}else
 					wronginput = true;
 			}
 			if(wronginput){
 				System.out.println("Please enter one of the following options:");
-				System.out.println("The default options with arraysize 10,50,100,500,1000,5000,10000");
+				System.out.println("The default options with 1000 Tests(N) and 5000 ArraySize");
 				System.out.println("<d> Testing both algorithm");
 				System.out.println("<fd> Testing the fact algorithm");
 				System.out.println("<sd> Testing the sort algorithm");
 				System.out.println("The custom options with custom arraysizes");
-				System.out.println("<b> [<ArraySize1>..] Testing both algorithm ");
-				System.out.println("<f> [<ArraySize1>..] Testing the fact algorithm");
-				System.out.println("<s> [<ArraySize1>..] Testing the sort algorithm");
+				System.out.println("<b> <N> <ArraySize> Testing both algorithm ");
+				System.out.println("<f> <N> <ArraySize> Testing the fact algorithm");
+				System.out.println("<s> <N> <ArraySize> Testing the sort algorithm");
 			}
 		}catch(NumberFormatException e){
 			System.err.println("Please enter Numbers");
@@ -73,32 +69,33 @@ public class GPGPU_Controller {
 	 * @param size sizes of the Test Arrays
 	 * @throws InterruptedException
 	 */
-	public static void bTest(int[] size) throws InterruptedException{
+	public static void bTest(int n, int size) throws InterruptedException{
 		showHW();
 		System.out.println("Starting tests");
-		String[] outf = new String[size.length];
-		String[] outs = new String[size.length];
-		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting factor test " + (i+1)+ " with ArraySize: " + size[i]);
-			outf[i]=factor_test(size[i]);
+		String[] outf = new String[n];
+		String[] outs = new String[n];
+		for(int i = 0; i < n;i++){
+			System.out.println("Starting factor test " + (i+1)+ " with ArraySize: " + size);
+			outf[i]=factor_test(size);
 			System.out.println();
 			Thread.sleep(5000);
 		}
-		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting sort test " + (i+1)+ " with ArraySize: " + size[i]);
-			outs[i]=sort_test(size[i]);
+		for(int i = 0; i < n;i++){
+			System.out.println("Starting sort test " + (i+1)+ " with ArraySize: " + size);
+			outs[i]=sort_test(size);
 			System.out.println();
 			Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
-			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outf[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outf[i]);
 		}
 		System.out.println("Showing Results for Sort Tests..");
 		for(int i = 0; i < outs.length;i++){
-			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outs[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outs[i]);
 		}
+		System.out.println("Overall Programm runtime: " + (System.currentTimeMillis()-startp));
 		System.out.println("Benchmark finished!");
 	}
 	/**
@@ -106,21 +103,22 @@ public class GPGPU_Controller {
 	 * @param size sizes of the Test Arrays
 	 * @throws InterruptedException
 	 */
-	public static void fTest(int[] size) throws InterruptedException{
+	public static void fTest(int n, int size) throws InterruptedException{
 		showHW();
 		System.out.println("Starting tests");
-		String[] outf = new String[size.length];
-		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting factor test " + (i+1)+ " with arraysize: " + size[i]);
-			outf[i]=factor_test(size[i]);
+		String[] outf = new String[n];
+		for(int i = 0; i < n;i++){
+			System.out.println("Starting factor test " + (i+1)+ " with arraysize: " + size);
+			outf[i]=factor_test(size);
 			System.out.println();
 			Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
-			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outf[i]);
-		}		
+			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outf[i]);
+		}
+		System.out.println("Overall Programm runtime: " + (System.currentTimeMillis()-startp));
 		System.out.println("Benchmark finished!");
 	}
 	/**
@@ -128,21 +126,22 @@ public class GPGPU_Controller {
 	 * @param size sizes of the Test Arrays
 	 * @throws InterruptedException
 	 */
-	public static void sTest(int[] size) throws InterruptedException{
+	public static void sTest(int n, int size) throws InterruptedException{
 		showHW();
 		System.out.println("Starting tests");
-		String[] outs = new String[size.length];
-		for(int i = 0; i < size.length;i++){
-			System.out.println("Starting sort test " + (i+1)+ " with arraysize: " + size[i]);
-			outs[i]=sort_test(size[i]);
+		String[] outs = new String[n];
+		for(int i = 0; i < n;i++){
+			System.out.println("Starting sort test " + (i+1)+ " with arraysize: " + size);
+			outs[i]=sort_test(size);
 			System.out.println();
 			Thread.sleep(5000);
 		}
 		System.out.println("All tests finished!");
 		System.out.println("Showing results for sort tests..");
 		for(int i = 0; i < outs.length;i++){
-			System.out.println("Test " + (i+1) + ". with arraysize " + size[i] + ": " + outs[i]);
+			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outs[i]);
 		}
+		System.out.println("Overall Programm runtime: " + (System.currentTimeMillis()-startp));
 		System.out.println("Benchmark finished!");
 	}
 	/**
