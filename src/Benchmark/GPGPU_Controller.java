@@ -13,9 +13,13 @@ import com.nativelibs4java.opencl.JavaCL;
  * @author Dominik Backhausen, Alexander Rieppel
  */
 public class GPGPU_Controller {
-	private static long startp;
+	private static long startp,timefc, timefg,timesc, timesg;
 	public static void main(String[] args){
 		startp = System.currentTimeMillis();
+		timefc = 0;
+		timefg=0;
+		timesc = 0;
+		timesg=0;
 		try{
 			boolean wronginput = false;
 			if(!(args.length >= 1)){
@@ -86,15 +90,19 @@ public class GPGPU_Controller {
 			System.out.println();
 			Thread.sleep(5000);
 		}
-		System.out.println("All tests finished!");
+		System.out.println("All tests finished!\n");
 		System.out.println("Showing results for factor tests..");
 		for(int i = 0; i < outf.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outf[i]);
 		}
+		System.out.println("Average Time GPU: " + (timefg/n));
+		System.out.println("Average Time CPU: " + (timefc/n) + "\n");
 		System.out.println("Showing Results for Sort Tests..");
 		for(int i = 0; i < outs.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outs[i]);
 		}
+		System.out.println("Average Time GPU: " + (timesg/n));
+		System.out.println("Average Time CPU: " + (timesc/n) + "\n");
 		System.out.println("Overall Programm runtime: " + (System.currentTimeMillis()-startp));
 		System.out.println("Benchmark finished!");
 	}
@@ -118,6 +126,8 @@ public class GPGPU_Controller {
 		for(int i = 0; i < outf.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outf[i]);
 		}
+		System.out.println("Average Time GPU: " + (timefg/n));
+		System.out.println("Average Time CPU: " + (timefc/n) + "\n");
 		System.out.println("Overall Programm runtime: " + (System.currentTimeMillis()-startp));
 		System.out.println("Benchmark finished!");
 	}
@@ -141,6 +151,8 @@ public class GPGPU_Controller {
 		for(int i = 0; i < outs.length;i++){
 			System.out.println("Test " + (i+1) + ". with arraysize " + size + ": " + outs[i]);
 		}
+		System.out.println("Average Time GPU: " + (timesg/n));
+		System.out.println("Average Time CPU: " + (timesc/n) + "\n");
 		System.out.println("Overall Programm runtime: " + (System.currentTimeMillis()-startp));
 		System.out.println("Benchmark finished!");
 	}
@@ -180,18 +192,20 @@ public class GPGPU_Controller {
 		long endt = System.currentTimeMillis();
 		System.out.println("Loading program finished!");
 		System.out.println("This took " + (endt - startt) + "ms");
-		String gput = "", cput;
+		long gput =0, cput=0;
 		try {
-			gput = outTime(Factorisierung.GPU_factor(todo));
+			gput = Factorisierung.GPU_factor(todo);
 			System.out.println("Time needed: " + gput);
 		} catch (IOException e) {
 			System.err.println("Error in GPU test!!");
 			System.exit(0);
 		}
-		cput = outTime(Factorisierung.CPU_factor(todo));
+		cput = Factorisierung.CPU_factor(todo);
 		System.out.println("Time needed: " + cput);
 		openres(todo);
-		return "CPU: " + cput + " GPU: " + gput;
+		timefc += cput;
+		timefg += gput;
+		return "CPU: " + outTime(cput) + " GPU: " + outTime(gput);
 	}
 	/**
 	 * This is one sort test
@@ -208,18 +222,20 @@ public class GPGPU_Controller {
 		long endt = System.currentTimeMillis();
 		System.out.println("Loading program finished!");
 		System.out.println("This took " + (endt - startt) + "ms");
-		String gput = "", cput;
+		long gput = 0, cput;
 		try {
-			gput = outTime(Sortieren.GPU_sort(todo));
+			gput = Sortieren.GPU_sort(todo);
 			System.out.println("Time needed: " + gput);
 		} catch (IOException e) {
 			System.err.println("Error in GPU Test!!");
 			System.exit(0);
 		}
-		cput = outTime(Sortieren.CPU_sort(todo));
+		cput = Sortieren.CPU_sort(todo);
 		System.out.println("Time needed: " + cput);
+		timesc += cput;
+		timesg += gput;
 		openres(todo);
-		return "CPU: " + cput + " GPU: " + gput;
+		return "CPU: " + outTime(cput) + " GPU: " + outTime(gput);
 	}
 	/**
 	 * This sould open the Ressources
