@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project name="GPGPU" basedir="." default="execute">
+    <property name="src" value="src"/>
+    <property name="output" value="build"/>
+    <property name="lib" value="lib"/>
+	<property name="mainClass" value="Benchmark.GPGPU_Controller"/>
+
+    <target name="execute" depends="compile,package">
+        <echo>
+            Executing
+        </echo>
+        <java jar="GPGPU.jar" fork="true">
+            <classpath refid="java"/>
+        </java>
+    </target>
+	
+<target name="package" depends="compile">
+    <echo message="package"/>
+      
+    <jar destfile="GPGPU.jar" basedir="${output}">
+	<path location="${lib}/javacl-1.0.0-RC3-shaded.jar"/>
+      <manifest>
+        <attribute name="Main-Class" value="${mainClass}"/>
+		<attribute name="Class-Path" value="javacl-demos-1.0.0-RC3-shaded.jar"/>
+      </manifest>
+    </jar>
+  </target>
+  
+    <target name="compile" depends="create">
+        <echo>
+            Compiling source files
+        </echo>
+        <javac destdir="${output}">            
+            <src path="${src}"/>            
+            <classpath refid="java"/>
+        </javac>
+    </target>
+
+    <target name="clean">
+        <echo>
+            Deleting old class files
+        </echo>
+        <delete dir="${output}"/>
+    </target>
+
+    <target name="create" depends="clean">
+        <echo>
+            Creating output directory
+        </echo>
+        <mkdir dir="${output}"/>
+    </target>
+
+    <path id="java">
+        <pathelement location="${output}/Benchmark"/>
+        <fileset dir="${lib}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+</project>

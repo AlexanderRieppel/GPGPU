@@ -26,7 +26,7 @@
 
 
 \chapter{Aufgabenstellung}
-	GPU Computing oder GPGPU(= General Purpose Computing on GPUs) bezeichnet die Verwendung eines Grafikprozessors (engl. Graphics Processing Unit oder GPU) für allgemeine Berechnungen im wissenschaftlich-technischen Bereich. Übersetzt bedeutet GPGPU in etwa Allgemeine Berechnung auf Grafikprozessoren.\\\\
+	GPU Computing oder GPGPU(=General Purpose Computing on GPUs) bezeichnet die Verwendung eines Grafikprozessors (engl. Graphics Processing Unit oder GPU) für allgemeine Berechnungen im wissenschaftlich-technischen Bereich. Übersetzt bedeutet GPGPU in etwa Allgemeine Berechnung auf Grafikprozessoren.\\\\
 	
 	Informieren Sie sich über die Möglichkeiten der Nutzung von GPUs in normalen Anwendungen. Zeigen Sie dazu im Gegensatz den Vorteil der GPUs in rechenintensiven Implementierungen auf [1Pkt]. Gibt es Entwicklungsumgebungen und in welchen Programmiersprachen kann man diese nutzen [1Pkt]? Können bestehende Programme (C und Java) auf GPUs genutzt werden und was sind dabei die Grundvoraussetzungen dafür [1Pkt]? Gibt es transcompiler und wie kommen diese zum Einsatz [1Pkt]?\\\\
 	
@@ -65,7 +65,11 @@
 \chapter{Arbeitsdurchführung}
 	Zunächst wurde sich mit der Materie von OpenCL auseinenadergesetzt und sind schlussendlich auf JavaCL gestoßen. Daher die Implemetierungsweise in Java uns am einfachsten erschien, haben wir uns entschieden, diese Library zu verwenden. Nachdem wir die ersten OpenCL Test-Kernels geschrieben haben, wurde der CPU-Teil implementiert. Für die Algorithmen haben wir uns für das Faktorisieren und den Sortieralgorithmus SelectionSort entschieden. Nachher wurden die eigentlichen Benchmarks geschrieben, die auch die Zeitmessungen beinhalten. Wir arbeiten während des gesamten Vorgangs ausschließlich mit statischen Methoden, da eigentlich nur Funktionalität gefordert war und nichts abgespeichert werden muss (ausgenommen Zeiten).
 \chapter{Testbericht}
-Nachdem unser Programm fertig geschrieben war haben wir mit den Benchmarks begonnen.
+Prinzipiell lässt sich das Programm per build.xml starten. Dazu gibt es 2 Möglichkeiten:\\
+\begin{itemize}
+\item run - Führt das Programm mit einem einzigen Durchlauf aus (zu Testzwecken)
+\item run2 - Führt das Programm mit den default Einstellungen aus (50 Durchläufe mit 5000 Arraygröße)
+\end{itemize}
 
 \section{Test 1}
 Wir haben einen Test auf den Heimrechner von Dominik Backhausen durchgeführt.\\
@@ -82,6 +86,7 @@ CPU: Intel(R) Core(TM) i7 3770K (4 Kerne, jeweils 3,50 GHz)
 GPU: NVIDIA GeForce GTX 670 4GD5
 
 \lstinputlisting{test2.txt}
+
 
 \chapter{Quellen}
 
